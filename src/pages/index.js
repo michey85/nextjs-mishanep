@@ -1,54 +1,72 @@
-import {
-  Link as ChakraLink,
-  Text,
-  Code,
-  List,
-  ListIcon,
-  ListItem,
-} from '@chakra-ui/react'
-import { CheckCircleIcon, LinkIcon } from '@chakra-ui/icons'
+import { createClient } from 'contentful'
+
 import { Hero } from '../components/Hero'
-import { Container } from '../components/Container'
-import { Main } from '../components/Main'
-import { DarkModeSwitch } from '../components/DarkModeSwitch'
-import { CTA } from '../components/CTA'
+import { Features } from '../components/Features'
+import { Courses } from '../components/Courses'
+import { Bio } from '../components/Bio'
+import { YouTubeList } from '../components/YouTubeList'
+import { Reviews } from '../components/Reviews'
+import { Partners } from '../components/Partners'
 import { Footer } from '../components/Footer'
 
-const Index = () => (
-  <Container height="100vh">
-    <Hero />
-    <Main>
-      <Text>
-        Example repository of <Code>Next.js</Code> + <Code>chakra-ui</Code>.
-      </Text>
+import {useHero, useBio, useCourses, useYouTubeList, useReview, usePartners, usePageContent} from '../helpers';
 
-      <List spacing={3} my={0}>
-        <ListItem>
-          <ListIcon as={CheckCircleIcon} color="green.500" />
-          <ChakraLink
-            isExternal
-            href="https://chakra-ui.com"
-            flexGrow={1}
-            mr={2}
-          >
-            Chakra UI <LinkIcon />
-          </ChakraLink>
-        </ListItem>
-        <ListItem>
-          <ListIcon as={CheckCircleIcon} color="green.500" />
-          <ChakraLink isExternal href="https://nextjs.org" flexGrow={1} mr={2}>
-            Next.js <LinkIcon />
-          </ChakraLink>
-        </ListItem>
-      </List>
-    </Main>
 
-    <DarkModeSwitch />
-    <Footer>
-      <Text>Next ❤️ Chakra</Text>
-    </Footer>
-    <CTA />
-  </Container>
-)
+export async function getStaticProps() {
+  const client = createClient({
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+  })
+
+  const {items: homePageContent} = await client.getEntries({
+      content_type: 'homePageContent'
+    });
+
+  
+  const {
+    youtube,
+    partners,
+    courses,
+    review,
+    bio,
+    hero,
+  } = usePageContent(homePageContent);
+    
+  return {
+    props: {
+      courses: useCourses(courses),
+      hero: useHero(hero),
+      bio: useBio(bio),
+      review: useReview(review),
+      partners: usePartners(partners),
+      playlists: useYouTubeList(youtube),
+    }
+  };
+}
+
+const Index = ({
+  courses,
+  playlists,
+  hero,
+  bio,
+  review,
+  partners,
+}) => (
+  <>
+    <Hero
+      {...hero}
+    />
+    <Features />
+    <Courses {...courses} />
+    <Bio
+      {...bio}
+    />
+    <YouTubeList {...playlists} />
+    <Reviews {...review} />
+    <Partners {...partners} />
+    
+    <Footer />
+  </>
+);
 
 export default Index

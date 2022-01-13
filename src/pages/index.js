@@ -11,6 +11,9 @@ import { Footer } from '../components/Footer'
 
 import {useHero, useBio, useCourses, useYouTubeList, useReview, usePartners, usePageContent} from '../helpers';
 
+// TODO: Features хранить в БД
+// TODO: экшны для био и хиро замапить на данные с сервера?
+// TODO: переделать картинки на встроенные в некст
 
 export async function getStaticProps() {
   const client = createClient({

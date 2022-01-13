@@ -5,6 +5,8 @@ import 'swiper/swiper-bundle.css';
 
 SwiperCore.use([Navigation]);
 
+// TODO: заменить свайпер на framer motion
+
 const Reviews = ({ list = [], title }) => (
     <Box bg='gray.50' mt={12}>
         <Box p={4} maxW="container.xl" mx="auto">

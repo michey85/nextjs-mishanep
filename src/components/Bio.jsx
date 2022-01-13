@@ -1,8 +1,8 @@
+import Image from 'next/image';
 import {
     Button,
     Flex,
     Heading,
-    Image,
     Stack,
     Text,
 } from '@chakra-ui/react';
@@ -38,11 +38,12 @@ const Bio = (props) => {
                     </Stack>
                 </Stack>
             </Flex>
-            <Flex flex={1} mb={0}>
+            <Flex flex={1} mb={0} minH="400px" position="relative">
                 <Image
                     alt={'Login Image'}
                     objectFit={'cover'}
-                    src={image}
+                    layout='fill'
+                    src={'https:' + image}
                 />
             </Flex>
         </Flex>

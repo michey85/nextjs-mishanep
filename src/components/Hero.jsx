@@ -1,8 +1,10 @@
+import Image from 'next/image';
+
 import {
   Button,
   Flex,
   Heading,
-  Image,
+//   Image,
   Stack,
   Text,
   useBreakpointValue,
@@ -52,11 +54,13 @@ export const Hero = ({ title, body, image, actions }) => (
                     </Stack>
                 </Stack>
             </Flex>
-            <Flex flex={1}>
+            <Flex flex={1} position='relative' minH="450px">
                 <Image
                     alt={'Login Image'}
                     objectFit={'cover'}
-                    src={image}
+                    layout="fill"
+                    src={'https:' + image}
+                    priority
                 />
             </Flex>
         </Stack>

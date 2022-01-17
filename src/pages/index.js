@@ -25,7 +25,7 @@ export async function getStaticProps() {
       content_type: 'homePageContent'
     });
 
-  
+
   const {
     youtube,
     partners,
@@ -34,7 +34,7 @@ export async function getStaticProps() {
     bio,
     hero,
   } = usePageContent(homePageContent);
-    
+
   return {
     props: {
       courses: useCourses(courses),
@@ -67,7 +67,7 @@ const Index = ({
     <YouTubeList {...playlists} />
     <Reviews {...review} />
     <Partners {...partners} />
-    
+
     <Footer />
   </>
 );

@@ -1,5 +1,7 @@
 import {
-    Box, SimpleGrid, Heading,
+    Box,
+    SimpleGrid,
+    Heading,
     Avatar,
     Center,
     Text,
@@ -74,8 +76,9 @@ const Course = (props) => {
                             key={index}
                             px={2}
                             py={1}
-                            bg="gray.50"
-                            fontWeight={'400'}>
+                            bg="gray.100"
+                            fontWeight={'400'}
+                        >
                             {tag}
                         </Badge>
                     ))}
@@ -98,7 +101,8 @@ const Course = (props) => {
                         }}
                         _focus={{
                             bg: 'blue.500',
-                        }}>
+                        }}
+                    >
                         Подробнее
                     </Button>
                 </Stack>
